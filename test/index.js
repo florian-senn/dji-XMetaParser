@@ -1,14 +1,11 @@
-import { assert } from 'chai'
-import defaultAwesomeFunction, { awesomeFunction } from '../src'
+import { expect } from 'chai'
+import { parseDjiMeta } from '../src'
+import testJpg1 from './test1.jpg'
 
-describe('Awesome test.', () => {
-  it('should test default awesome function', () => {
-    const expectedVal = 'I am the Default Awesome Function, fellow comrade! - Dinesh'
-    assert(defaultAwesomeFunction('Dinesh') === expectedVal, 'Default not awesome :(')
-  })
-
-  it('should test awesome function', () => {
-    const expectedVal = 'I am just an Awesome Function'
-    assert(awesomeFunction() === expectedVal, 'Named awesome :(')
+describe('Image to Metadata Object', () => {
+  it('should create a object containing metadata', () => {
+    const expectedVal = {
+    }
+    expect(parseDjiMeta(testJpg1).to.have.members(expectedVal))
   })
 })
