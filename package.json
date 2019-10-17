@@ -1,0 +1,20 @@
+{
+  "name": "dji-xmetaparser",
+  "version": "0.0.1",
+  "description": "A XMP parser for DJI drones' metadata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dji",
+    "xmp",
+    "parser",
+    "metadata",
+    "drone",
+    "aerial",
+    "photography"
+  ],
+  "author": "Florian Senn",
+  "license": "ISC"
+}
