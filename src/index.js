@@ -1,10 +1,8 @@
-import fetch from 'isomorphic-fetch'
+import sax from 'sax'
 
-const markerBegin = '<x:xmpmeta'
-const markerEnd = '</x:xmpmeta>'
-
-const sourceToBuffer = (src) => new Promise((resolve, reject) => {
-  fetch(src)
+const createBuffer = (promise) => new Promise((resolve, reject) => {
+  // if (someCondition) reject(new Error())
+  promise
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
       const buffer = Buffer.alloc(arrayBuffer.byteLength)
@@ -12,12 +10,13 @@ const sourceToBuffer = (src) => new Promise((resolve, reject) => {
       for (let i = 0; i < buffer.length; ++i) {
         buffer[i] = view[i]
       }
-      return buffer
+      resolve(buffer)
     })
 })
 
-const parseDjiMeta = (input) => new Promise((resolve, reject) => {
-  const buffer = sourceToBuffer(input)
+const parseDjiMeta = (buffer) => new Promise((resolve, reject) => {
+  const markerBegin = '<x:xmpmeta'
+  const markerEnd = '</x:xmpmeta>'
   if (!Buffer.isBuffer(buffer)) {
     reject(new Error('DJI-XMetaParser: Can\'t create buffer'))
   } else {
@@ -27,8 +26,7 @@ const parseDjiMeta = (input) => new Promise((resolve, reject) => {
       const offsetEnd = buffer.indexOf(markerEnd)
       if (offsetEnd) {
         const xmlBuffer = buffer.slice(offsetBegin, offsetEnd + markerEnd.length)
-        console.log(xmlBuffer.toString('utf-8', 0, xmlBuffer.length))
-        const parser = require('sax').parser(true)
+        const parser = sax.parser
         // eslint-disable-next-line no-unused-vars
         let nodeName
 
@@ -48,4 +46,4 @@ const parseDjiMeta = (input) => new Promise((resolve, reject) => {
   }
 })
 
-export { parseDjiMeta }
+export { parseDjiMeta, createBuffer }

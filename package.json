@@ -42,7 +42,6 @@
   },
   "homepage": "https://github.com/florian-senn/dji-XMetaParser#readme",
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1",
     "sax": "^1.2.4"
   },
   "devDependencies": {

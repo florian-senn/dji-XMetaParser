@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import example1 from './example1.jpg'
 import { parseDjiMeta} from '../index'
+
+const example1 = './example1.jpg'
 
 console.log(parseDjiMeta(example1))
