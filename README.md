@@ -8,7 +8,7 @@ Swiss tool for extracting XMP metadata from DJI drones.
 
 # Features
 
-
+Right now, it takes some text-input and parses the attributes between 
 
 # Commands
 - `npm run clean` - Remove `lib/` directory

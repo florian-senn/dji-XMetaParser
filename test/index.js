@@ -1,8 +1,13 @@
 import { parseText } from '../src'
 import { describe } from 'mocha'
+import chai from 'chai'
+import chaiPromise from 'chai-as-promised'
+
+chai.should()
+chai.use(chaiPromise)
 
 // const testJpg1 = 'C:\\Users\\Florian\\PhpstormProjects\\dji-XMetaParser\\test\\test1.jpg'
-const testString = '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
+const testString1 = '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
   ' <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n' +
   '  <rdf:Description rdf:about="DJI Meta Data"\n' +
   '    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"\n' +
@@ -39,15 +44,56 @@ const testString = '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
   ' </rdf:RDF>\n' +
   '</x:xmpmeta>'
 
+const testObject1 = {
+  crs: {
+    AlreadyApplied: 'False',
+    HasCrop: 'False',
+    HasSettings: 'False',
+    Version: 7,
+  },
+  dc: {
+    format: 'image/jpg',
+  },
+  'drone-dji': {
+    AbsoluteAltitude: 400.33,
+    CamReverse: 0,
+    FlightPitchDegree: 3,
+    FlightRollDegree: -3,
+    FlightYawDegree: -19.1,
+    GimbalPitchDegree: 0,
+    GimbalReverse: 0,
+    GimbalRollDegree: 0,
+    GimbalYawDegree: -27,
+    GpsLatitude: 48.79688,
+    GpsLongitude: 8.8548813,
+    RelativeAltitude: 0,
+    SelfData: 'Self data',
+  },
+  rdf: {
+    about: 'DJI Meta Data',
+  },
+  tiff: {
+    Make: 'DJI',
+    Model: 'Test_Pro',
+  },
+  xmlns: {
+    GPano: 'http://ns.google.com/photos/1.0/panorama/',
+    crs: 'http://ns.adobe.com/camera-raw-settings/1.0/',
+    dc: 'http://purl.org/dc/elements/1.1/',
+    'drone-dji': 'http://www.dji.com/drone-dji/1.0/',
+    exif: 'http://ns.adobe.com/exif/1.0/',
+    tiff: 'http://ns.adobe.com/tiff/1.0/',
+    xmp: 'http://ns.adobe.com/xap/1.0/',
+    xmpMM: 'http://ns.adobe.com/xap/1.0/mm/',
+  },
+  xmp: {
+    CreateDate: 1970,
+    ModifyDate: 1970,
+  },
+}
+
 describe('Text to Metadata Object', () => {
-  it('resolves', (done) => {
-    parseText(testString)
-      .then()
-      .finally(done)
-  })
-  it('creates a metadata object', (done) => {
-    parseText(testString)
-      .then()
-      .finally(done)
+  it('creates a metadata object', async () => {
+    return parseText(testString1).should.eventually.deep.equal(testObject1)
   })
 })
