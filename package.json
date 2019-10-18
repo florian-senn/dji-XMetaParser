@@ -1,12 +1,12 @@
 {
   "name": "dji-xmetaparser",
   "type": "module",
-  "version": "0.1.5-alpha",
+  "version": "1.0.0",
   "description": "A XMP parser for DJI drones' metadata",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
-    "test": "npm run lint",
+    "test": "npm run lint && npm run cover",
     "test:prod": "cross-env BABEL_ENV=production npm run test",
     "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
     "test:watch": "npm test -- --watch",
@@ -41,9 +41,7 @@
     "url": "https://github.com/florian-senn/dji-XMetaParser/issues"
   },
   "homepage": "https://github.com/florian-senn/dji-XMetaParser#readme",
-  "dependencies": {
-    "sax": "^1.2.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
