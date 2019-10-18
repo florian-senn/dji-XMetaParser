@@ -1,24 +1,26 @@
 import sax from 'sax'
 
-const createBuffer = (promise) => new Promise((resolve, reject) => {
+const createBuffer = (arrayBuffer) => new Promise((resolve, reject) => {
   // if (someCondition) reject(new Error())
-  promise
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => {
-      const buffer = Buffer.alloc(arrayBuffer.byteLength)
-      const view = new Uint8Array(arrayBuffer)
-      for (let i = 0; i < buffer.length; ++i) {
-        buffer[i] = view[i]
-      }
-      resolve(buffer)
-    })
+  console.log(arrayBuffer)
+  if (arrayBuffer instanceof ArrayBuffer) {
+    const buffer = Buffer.alloc(arrayBuffer.byteLength)
+    const view = new Uint8Array(arrayBuffer)
+    for (let i = 0; i < buffer.length; ++i) {
+      buffer[i] = view[i]
+    }
+    console.log(buffer)
+    resolve(buffer)
+  } else {
+    reject(new Error('DJI-XMetaParser, createBuffer: Input isn\'t ArrayBuffer, can\'t create Buffer'))
+  }
 })
 
 const parseDjiMeta = (buffer) => new Promise((resolve, reject) => {
   const markerBegin = '<x:xmpmeta'
   const markerEnd = '</x:xmpmeta>'
   if (!Buffer.isBuffer(buffer)) {
-    reject(new Error('DJI-XMetaParser: Can\'t create buffer'))
+    reject(new Error('DJI-XMetaParser: Input isn\'t buffer. Can\'t parse metadata'))
   } else {
     const data = {}
     const offsetBegin = buffer.indexOf(markerBegin)
