@@ -1,4 +1,4 @@
-import { parseDjiMeta } from '../src'
+import { parseText } from '../src'
 import { describe } from 'mocha'
 
 // const testJpg1 = 'C:\\Users\\Florian\\PhpstormProjects\\dji-XMetaParser\\test\\test1.jpg'
@@ -39,10 +39,15 @@ const testString = '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
   ' </rdf:RDF>\n' +
   '</x:xmpmeta>'
 
-describe('Image to Metadata Object', () => {
-  it('should create a object containing metadata', () => {
-    const buffer = Buffer.from(testString)
-    parseDjiMeta(buffer)
-    return true
+describe('Text to Metadata Object', () => {
+  it('resolves', (done) => {
+    parseText(testString)
+      .then()
+      .finally(done)
+  })
+  it('creates a metadata object', (done) => {
+    parseText(testString)
+      .then()
+      .finally(done)
   })
 })

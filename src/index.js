@@ -1,51 +1,20 @@
-import sax from 'sax'
+const parseText = (text) => new Promise((resolve, reject) => {
+  const openTag = '<rdf:Description'
+  const endTag = '</rdf:Description>'
+  const start = text.indexOf(openTag)
+  const end = text.indexOf(endTag)
+  const slice = text.slice(start + openTag.length, end)
+  const regex = new RegExp('(?<namespace>\\S+):(?<name>\\S+)=["\']?(?<value>[^"]+)["\']?', 'g')
+  const attributes = [...slice.matchAll(regex)]
+  const result = {}
 
-const createBuffer = (arrayBuffer) => new Promise((resolve, reject) => {
-  // if (someCondition) reject(new Error())
-  console.log(arrayBuffer)
-  if (arrayBuffer instanceof ArrayBuffer) {
-    const buffer = Buffer.alloc(arrayBuffer.byteLength)
-    const view = new Uint8Array(arrayBuffer)
-    for (let i = 0; i < buffer.length; ++i) {
-      buffer[i] = view[i]
-    }
-    console.log(buffer)
-    resolve(buffer)
-  } else {
-    reject(new Error('DJI-XMetaParser, createBuffer: Input isn\'t ArrayBuffer, can\'t create Buffer'))
+  for (const attribute of attributes) {
+    const value = attribute.groups.value
+    result[attribute.groups.namespace]
+      ? result[attribute.groups.namespace][attribute.groups.name] = isNaN(parseFloat(value)) ? value : parseFloat(value)
+      : result[attribute.groups.namespace] = { [attribute.groups.name]: isNaN(parseFloat(value)) ? value : parseFloat(value) }
   }
+  resolve(result)
 })
 
-const parseDjiMeta = (buffer) => new Promise((resolve, reject) => {
-  const markerBegin = '<x:xmpmeta'
-  const markerEnd = '</x:xmpmeta>'
-  if (!Buffer.isBuffer(buffer)) {
-    reject(new Error('DJI-XMetaParser: Input isn\'t buffer. Can\'t parse metadata'))
-  } else {
-    const data = {}
-    const offsetBegin = buffer.indexOf(markerBegin)
-    if (offsetBegin) {
-      const offsetEnd = buffer.indexOf(markerEnd)
-      if (offsetEnd) {
-        const xmlBuffer = buffer.slice(offsetBegin, offsetEnd + markerEnd.length)
-        const parser = sax.parser
-        // eslint-disable-next-line no-unused-vars
-        let nodeName
-
-        parser.onerror = (err) => reject(err)
-        parser.onend = () => resolve(data)
-
-        parser.onattribute = function (attr) {
-          data.raw[attr.name] = attr.value
-        }
-        parser.write(xmlBuffer.toString('utf-8', 0, xmlBuffer.length)).close()
-      } else {
-        resolve(data)
-      }
-    } else {
-      resolve(data)
-    }
-  }
-})
-
-export { parseDjiMeta, createBuffer }
+export { parseText }
