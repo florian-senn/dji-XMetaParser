@@ -1,3 +1,5 @@
+import { camelCase } from 'lodash'
+
 const parseText = (text) => new Promise((resolve, reject) => {
   const openTag = '<rdf:Description'
   const endTag = '</rdf:Description>'
@@ -9,10 +11,23 @@ const parseText = (text) => new Promise((resolve, reject) => {
   const result = {}
 
   for (const attribute of attributes) {
-    const value = attribute.groups.value
-    result[attribute.groups.namespace]
-      ? result[attribute.groups.namespace][attribute.groups.name] = isNaN(parseFloat(value)) ? value : parseFloat(value)
-      : result[attribute.groups.namespace] = { [attribute.groups.name]: isNaN(parseFloat(value)) ? value : parseFloat(value) }
+    const isBool = (value) => value.toLowerCase() === 'true' || value.toLowerCase() === 'false'
+    const toBool = (value) => value.toLowerCase() === 'true'
+    const sanitizeValue = (value) => {
+      if (!isNaN(parseFloat(value))) {
+        return parseFloat(value)
+      } else if (isBool(value)) {
+        return toBool(value)
+      } else {
+        return value
+      }
+    }
+    const value = sanitizeValue(attribute.groups.value)
+    const namespace = camelCase(attribute.groups.namespace)
+    const name = camelCase(attribute.groups.name)
+    result[namespace]
+      ? result[namespace][name] = value
+      : result[namespace] = { [name]: value }
   }
   resolve(result)
 })
