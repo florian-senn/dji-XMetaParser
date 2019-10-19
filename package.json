@@ -1,7 +1,7 @@
 {
   "name": "dji-xmetaparser",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A XMP parser for DJI drones' metadata",
   "main": "./lib/index.js",
   "scripts": {
@@ -41,7 +41,9 @@
     "url": "https://github.com/florian-senn/dji-XMetaParser/issues"
   },
   "homepage": "https://github.com/florian-senn/dji-XMetaParser#readme",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
