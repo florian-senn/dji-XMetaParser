@@ -93,7 +93,13 @@ const testObject1 = {
 }
 
 describe('Text to Metadata Object', () => {
-  it('creates a metadata object', async () => {
+  it('creates a metadata object', () => {
+    return parseText('<rdf:Description namespace:name="value"></rdf:Description>').should.eventually.deep.equal({ namespace: { name: 'value' } })
+  })
+  it('creates an empty metadata object', () => {
+    return parseText('').should.eventually.deep.equal({})
+  })
+  it('creates a complex metadata object', () => {
     return parseText(testString1).should.eventually.deep.equal(testObject1)
   })
 })
