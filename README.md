@@ -1,6 +1,9 @@
 # DJI XMP Metadata Parser
 
-[![Build Status](https://travis-ci.com/florian-senn/dji-XMetaParser.svg?branch=master)](https://travis-ci.com/florian-senn/dji-XMetaParser.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/florian-senn/dji-XMetaParser/badge.svg?branch=master)](https://coveralls.io/github/florian-senn/dji-XMetaParser?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.com/florian-senn/dji-XMetaParser.svg?branch=master)](https://travis-ci.com/florian-senn/dji-XMetaParser)
+[![Coverage Status](https://coveralls.io/repos/github/florian-senn/dji-XMetaParser/badge.svg?branch=master)](https://coveralls.io/github/florian-senn/dji-XMetaParser?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 **Get the most out of your DJI Footage** ✨
 
@@ -8,8 +11,8 @@ Swiss tool for extracting XMP metadata from DJI drones.
 
 # Features
 
-Right now, it takes some text-input and parses the attributes of `<rdf:Description/>`
-You care about loading the image/jpg, XMetaParser does the rest.
+Right now, it takes a string and parses the attributes of `<rdf:Description/>`
+You care about loading the image/jpg and providing it as a string, XMetaParser does the rest.
 
 Promise-based.
 
