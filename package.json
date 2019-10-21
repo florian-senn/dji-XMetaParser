@@ -1,7 +1,7 @@
 {
   "name": "dji-xmetaparser",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A XMP parser for DJI drones' metadata",
   "main": "./lib/index.js",
   "scripts": {
