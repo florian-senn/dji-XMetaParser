@@ -32,7 +32,6 @@
     "drone",
     "aerial",
     "photography",
-    "chai-plugin",
     "browser"
   ],
   "author": "Florian Senn <npm@senn.bz>",
@@ -42,7 +41,7 @@
   },
   "homepage": "https://github.com/florian-senn/dji-XMetaParser#readme",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -8,7 +8,23 @@ Swiss tool for extracting XMP metadata from DJI drones.
 
 # Features
 
-Right now, it takes some text-input and parses the attributes between 
+Right now, it takes some text-input and parses the attributes of `<rdf:Description/>`
+You care about loading the image/jpg, XMetaParser does the rest.
+
+Promise-based.
+
+# Example
+    
+    import { parseText } from 'dji-xmetaparser'
+    fetch('link/to/your.jpg')
+        .then(response => response.blob())
+        .then(blob => blob.text())
+        .then(text => parseText(text))
+        .then(metadata => {
+            console.log(metadata)
+        })
+        .catch()
+        .finally()
 
 # Commands
 - `npm run clean` - Remove `lib/` directory
