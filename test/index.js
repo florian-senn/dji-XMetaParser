@@ -7,7 +7,8 @@ chai.should()
 chai.use(chaiPromise)
 
 // const testJpg1 = 'C:\\Users\\Florian\\PhpstormProjects\\dji-XMetaParser\\test\\test1.jpg'
-const testString1 = '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
+const testString1 =
+  '<x:xmpmeta xmlns:x="adobe:ns:meta/">\n' +
   ' <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n' +
   '  <rdf:Description rdf:about="DJI Meta Data"\n' +
   '    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"\n' +

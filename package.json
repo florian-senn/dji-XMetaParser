@@ -1,5 +1,5 @@
 {
-  "name": "dji-xmetaparser",
+  "name": "@florian-senn/dji-xmetaparser",
   "type": "module",
   "version": "1.0.3",
   "description": "A XMP parser for DJI drones' metadata",
@@ -67,5 +67,6 @@
   },
   "engines": {
     "node": ">=10"
-  }
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
